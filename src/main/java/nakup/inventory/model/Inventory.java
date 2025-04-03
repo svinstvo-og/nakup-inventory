@@ -25,6 +25,6 @@ public class Inventory {
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
-    @ManyToMany(mappedBy = "inventory", fetch = FetchType.EAGER)
-    List<Warehouse> warehouse;
+    @ManyToOne(fetch = FetchType.LAZY)
+    Warehouse warehouse;
 }

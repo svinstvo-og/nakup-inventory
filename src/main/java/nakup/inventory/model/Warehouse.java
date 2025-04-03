@@ -25,6 +25,6 @@ public class Warehouse {
     LocalDateTime created;
     LocalDateTime updated;
 
-    @ManyToMany
+    @OneToMany
     List<Inventory> inventory;
 }

@@ -26,15 +26,12 @@ public class InventoryService {
     @Transactional
     public void save(InventoryCreateRequest request,  Warehouse warehouse) {
         Inventory inventory = new Inventory();
-        List<Warehouse> warehouses = new ArrayList<>();
-        List<Inventory> inventories = warehouse.getInventory();
-        inventories.add(inventory);
-        warehouses.add(warehouse);
+        List<Inventory> warehouseInventory = warehouse.getInventory();
 
         inventory.setQuantity(request.getQuantity());
-        inventory.setWarehouse(warehouses);
+        inventory.setWarehouse(warehouse);
+        warehouseInventory.add(inventory);
         inventory.setProductId(request.getProductId());
         inventoryRepository.save(inventory);
-        warehouse.setInventory(inventories);
     }
 }

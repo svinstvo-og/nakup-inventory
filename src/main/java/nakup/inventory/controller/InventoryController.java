@@ -7,8 +7,11 @@ import nakup.inventory.model.Warehouse;
 import nakup.inventory.repository.InventoryRepository;
 import nakup.inventory.service.InventoryService;
 import nakup.inventory.service.WarehouseService;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +29,18 @@ public class InventoryController {
     @Autowired
     WarehouseService warehouseService;
 
-    @PostMapping("/")
+    @PostMapping
     public String createInventory(@RequestBody InventoryCreateRequest request) {
+        if (inventoryRepository.findByProductId(request.getProductId()) != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Product already exists");
+        }
         Warehouse warehouse = warehouseService.validate(request.getWarehouseId());
         inventoryService.save(request, warehouse);
         return "successssssssssssss";
     }
+
+    @PutMapping
+    public void updateWarehouse() {};
 
     @GetMapping("/all")
     public List<InventoryResponse> getAllInventory() {

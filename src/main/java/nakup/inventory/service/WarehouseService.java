@@ -6,6 +6,8 @@ import nakup.inventory.model.Warehouse;
 import nakup.inventory.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,7 +19,12 @@ public class WarehouseService {
     private WarehouseRepository warehouseRepository;
 
     public Warehouse validate(Long warehouseId) {
-        return warehouseRepository.findById(warehouseId).orElse(null);
+        Warehouse warehouse = warehouseRepository.findById(warehouseId).orElse(null);
+        if (warehouse == null) {
+            throw new RuntimeException("Warehouse with id " + warehouseId + " not found");
+        }
+        System.out.println("warehouse: id-" + warehouse.getId() + " " + warehouse.getName());
+        return warehouse;
     }
 
     public void addWarehouse (WarehouseAddRequest request) {

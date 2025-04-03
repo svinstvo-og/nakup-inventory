@@ -20,20 +20,12 @@ public class InventoryResponse {
     Long productId;
     Long quantity;
     @JsonProperty("warehouse-id")
-    List<Long> warehouseId;
+    Long warehouseId;
 
     public InventoryResponse (Inventory inventory) {
         this.id = inventory.getId();
         this.productId = inventory.getProductId();
         this.quantity = inventory.getQuantity();
-
-        List<Long> ids = new ArrayList<>();
-        List<Warehouse> warehouses = inventory.getWarehouse();
-
-        for (Warehouse warehouse : warehouses) {
-            ids.add(warehouse.getId());
-        }
-
-        this.warehouseId = ids;
+        this.warehouseId = inventory.getWarehouse().getId();
     }
 }
