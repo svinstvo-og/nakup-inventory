@@ -1,6 +1,7 @@
 package nakup.inventory.service;
 
 import nakup.inventory.dto.WarehouseAddRequest;
+import nakup.inventory.dto.WarehouseResponse;
 import nakup.inventory.model.Inventory;
 import nakup.inventory.model.Warehouse;
 import nakup.inventory.repository.WarehouseRepository;
@@ -36,5 +37,16 @@ public class WarehouseService {
         warehouse.setInventory(inventory);
         warehouse.setCreated(LocalDateTime.now());
         warehouseRepository.save(warehouse);
+    }
+
+    public List<WarehouseResponse> getAllWarehouses() {
+        List<Warehouse> warehouses = warehouseRepository.findAll();
+        List<WarehouseResponse> response = new ArrayList<>();
+
+        for (Warehouse warehouse : warehouses) {
+            response.add(new WarehouseResponse(warehouse));
+        }
+
+        return response;
     }
 }
