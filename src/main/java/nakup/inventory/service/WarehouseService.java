@@ -1,9 +1,11 @@
 package nakup.inventory.service;
 
+import jakarta.transaction.Transactional;
 import nakup.inventory.dto.WarehouseAddRequest;
 import nakup.inventory.dto.WarehouseResponse;
 import nakup.inventory.model.Inventory;
 import nakup.inventory.model.Warehouse;
+import nakup.inventory.repository.InventoryRepository;
 import nakup.inventory.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ import java.util.List;
 public class WarehouseService {
     @Autowired
     private WarehouseRepository warehouseRepository;
+
+    @Autowired
+    private InventoryRepository inventoryRepository;
 
     public Warehouse validate(Long warehouseId) {
         Warehouse warehouse = warehouseRepository.findById(warehouseId).orElse(null);
@@ -48,5 +53,19 @@ public class WarehouseService {
         }
 
         return response;
+    }
+
+    @Transactional
+    public void delete(Long warehouseId) {
+        Warehouse warehouse = validate(warehouseId);
+        List<Inventory> inventory = inventoryRepository.findAllByWarehouse(warehouse);
+
+        for (Inventory inventoryItem : inventory) {
+            if (inventoryItem.getWarehouse().getId() == warehouse.getId()) {
+                inventoryRepository.delete(inventoryItem);
+            }
+        }
+
+        warehouseRepository.deleteById(warehouseId);
     }
 }

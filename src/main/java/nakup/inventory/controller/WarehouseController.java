@@ -26,4 +26,9 @@ public class WarehouseController {
     public List<WarehouseResponse> getAllWarehouses() {
         return warehouseService.getAllWarehouses();
     }
+
+    @DeleteMapping
+    public void deleteWarehouse(@RequestBody WarehouseResponse request) {
+        warehouseService.delete(request.getId());
+    }
 }
