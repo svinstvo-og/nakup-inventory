@@ -1,5 +1,6 @@
 package nakup.inventory.controller;
 
+import nakup.inventory.dto.ChangeQuantityRequest;
 import nakup.inventory.dto.InventoryCreateRequest;
 import nakup.inventory.dto.InventoryResponse;
 import nakup.inventory.model.Inventory;
@@ -40,7 +41,9 @@ public class InventoryController {
     }
 
     @PutMapping
-    public void updateWarehouse() {};
+    public InventoryResponse changeQuantity(@RequestBody ChangeQuantityRequest request) {
+        return inventoryService.changeQuantity(request);
+    }
 
     @GetMapping("/all")
     public List<InventoryResponse> getAllInventory() {
