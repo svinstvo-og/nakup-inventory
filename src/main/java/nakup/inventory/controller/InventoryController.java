@@ -16,7 +16,7 @@ public class InventoryController {
     @Autowired
     InventoryService inventoryService;
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public String createInventory(@RequestBody InventoryCreateRequest request) {
         inventoryService.save(request);
         return "successssssssssssss";

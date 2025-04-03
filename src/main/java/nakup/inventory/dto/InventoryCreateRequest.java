@@ -10,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InventoryCreateRequest {
-    private String name;
     private Long quantity;
     private Long warehouseId;
     private Long productId;
