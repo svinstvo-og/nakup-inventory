@@ -3,6 +3,7 @@ package nakup.inventory.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -11,6 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "warehouse")
 public class Warehouse {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +21,9 @@ public class Warehouse {
 
     String name;
     String address;
+
+    LocalDateTime created;
+    LocalDateTime updated;
 
     @ManyToMany
     List<Inventory> inventory;

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,9 @@ public class Inventory {
 
     Long productId;
     Long quantity;
+
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 
     @ManyToMany(mappedBy = "inventory", fetch = FetchType.EAGER)
     List<Warehouse> warehouse;

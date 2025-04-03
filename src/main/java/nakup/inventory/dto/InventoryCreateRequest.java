@@ -1,5 +1,6 @@
 package nakup.inventory.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class InventoryCreateRequest {
     private Long quantity;
+    @JsonProperty("warehouse-id")
     private Long warehouseId;
+    @JsonProperty("product-id")
     private Long productId;
 }
