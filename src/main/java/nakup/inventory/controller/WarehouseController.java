@@ -16,18 +16,18 @@ public class WarehouseController {
     @Autowired
     private WarehouseService warehouseService;
 
-    @PostMapping
+    @PostMapping("/")
     public String addWarehouse(@RequestBody WarehouseAddRequest request) {
         warehouseService.addWarehouse(request);
         return "success, added: " + request.getName() + ", " + request.getAddress();
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<WarehouseResponse> getAllWarehouses() {
         return warehouseService.getAllWarehouses();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/")
     public void deleteWarehouse(@RequestBody WarehouseResponse request) {
         warehouseService.delete(request.getId());
     }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/inventory")
+@RequestMapping("/api/inventory")
 public class InventoryController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class InventoryController {
     @Autowired
     WarehouseService warehouseService;
 
-    @PostMapping
+    @PostMapping("/")
     public String createInventory(@RequestBody InventoryCreateRequest request) {
         if (inventoryRepository.findByProductId(request.getProductId()) != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Product already exists");
@@ -40,7 +40,7 @@ public class InventoryController {
         return "successssssssssssss";
     }
 
-    @PutMapping
+    @PutMapping("/")
     public InventoryResponse changeQuantity(@RequestBody ChangeQuantityRequest request) {
         return inventoryService.changeQuantity(request);
     }
