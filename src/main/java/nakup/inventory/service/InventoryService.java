@@ -59,4 +59,6 @@ public class InventoryService {
         }
         throw new RuntimeException("Both changeQuantity and changeQuantityBy are null");
     }
+
+    //public void reserve
 }
