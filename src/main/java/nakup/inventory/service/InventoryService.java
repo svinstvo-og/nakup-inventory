@@ -60,5 +60,12 @@ public class InventoryService {
         throw new RuntimeException("Both changeQuantity and changeQuantityBy are null");
     }
 
+//    public void addStock(ChangeQuantityRequest request) {
+//        Inventory inventory = inventoryRepository.findByProductId(request.getProductId());
+//        if (inventory == null) {
+//
+//        }
+//    }
+
     //public void reserve
 }
