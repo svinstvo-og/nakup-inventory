@@ -42,7 +42,7 @@ public class InventoryController {
 
     @PutMapping("/")
     public InventoryResponse changeQuantity(@RequestBody ChangeQuantityRequest request) {
-        return inventoryService.changeQuantity(request);
+        return new InventoryResponse(inventoryService.changeInventoryQuantity(request));
     }
 
     @GetMapping("/all")

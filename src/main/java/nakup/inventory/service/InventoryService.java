@@ -40,7 +40,7 @@ public class InventoryService {
     }
 
     @Transactional
-    public InventoryResponse changeQuantity(ChangeQuantityRequest request) {
+    public Inventory changeInventoryQuantity(ChangeQuantityRequest request) {
         //System.out.println(request.getProductId() + ", " + request.getChangeQuantity() + ", by: " + request.getChangeQuantityBy());
         Inventory inventory = inventoryRepository.findByProductId(request.getProductId());
         if (inventory == null) {
@@ -50,22 +50,13 @@ public class InventoryService {
         if (request.getChangeQuantityBy() != null) {
             inventory.setQuantity(inventory.getQuantity() + request.getChangeQuantityBy());
             inventory.setUpdatedAt(LocalDateTime.now());
-            return new InventoryResponse(inventory);
+            return inventory;
         }
         else if (request.getChangeQuantity() != null) {
             inventory.setQuantity(request.getChangeQuantity());
             inventory.setUpdatedAt(LocalDateTime.now());
-            return new InventoryResponse(inventory);
+            return inventory;
         }
         throw new RuntimeException("Both changeQuantity and changeQuantityBy are null");
     }
-
-//    public void addStock(ChangeQuantityRequest request) {
-//        Inventory inventory = inventoryRepository.findByProductId(request.getProductId());
-//        if (inventory == null) {
-//
-//        }
-//    }
-
-    //public void reserve
 }
